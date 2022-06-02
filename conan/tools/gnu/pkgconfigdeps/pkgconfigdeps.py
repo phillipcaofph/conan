@@ -11,8 +11,8 @@ class PkgConfigDeps(object):
     def content(self):
         """Get all the *.pc files content"""
         pc_files = {}
-        host_req = self._conanfile.dependencies.host
-        for _, dep in host_req.items():
+        dependencies = self._conanfile.dependencies.host + self._conanfile.dependencies.test
+        for _, dep in dependencies.items():
             dep_name = str(dep)
             for pc_name, pc_content in get_pc_files_and_content(self._conanfile, dep).items():
                 if pc_name in pc_files:
